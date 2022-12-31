@@ -81,12 +81,15 @@ class ViewController: UIViewController {
     
     private func getResult() -> String {
         if isInputValid() {
-            var result = Int(input.first!!)!
-            
+            guard var result = Int(input.first!!) else {
+                return "NaN"
+            }
             var i = 1
             while i < input.count-2 {
                 let op = input[i]!
-                let number = Int(input[i+1]!)!
+                guard var number = Int(input[i+1]!) else{
+                    return "NaN"
+                }
                 let temp = operate(result, op, number)
                 if temp != "NaN" {
                     if let temp2 = Int(temp) {
@@ -97,6 +100,7 @@ class ViewController: UIViewController {
                 } else {
                     return "NaN"
                 }
+                
                 i += 2
             }
             return String(result)
